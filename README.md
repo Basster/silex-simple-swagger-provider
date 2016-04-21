@@ -36,7 +36,7 @@ Services
 Registering
 -----------
 ```php
-$app->register(new JDesrosiers\Silex\Provider\SwaggerServiceProvider(), [
+$app->register(new Basster\Silex\Provider\Swagger\SwaggerProvider(), [
     "swagger.servicePath" => __DIR__ . "/path/to/your/api",
 ]);
 ```

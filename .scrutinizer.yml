@@ -32,6 +32,3 @@ checks:
     php:
         code_rating: true
         duplication: true
-
-before_commands:
-    - "composer update --prefer-source -o"

@@ -29,11 +29,11 @@ class SwaggerConfig
      * @param mixed  $exclude
      */
     public function __construct(
-      $basePath,
-      $analyser = null,
-      $analysis = null,
-      array $processors = [],
-      $exclude = null
+        $basePath,
+        $analyser = null,
+        $analysis = null,
+        array $processors = [],
+        $exclude = null
     ) {
         $this->analyser   = $analyser;
         $this->analysis   = $analysis;

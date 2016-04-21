@@ -1,7 +1,7 @@
 language: php
 
 before_script:
-  - composer install --dev --prefer-source -o
+  - composer update --prefer-source -o
 
 script: vendor/bin/phpunit
 

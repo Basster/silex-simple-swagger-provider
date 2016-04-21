@@ -34,4 +34,4 @@ checks:
         duplication: true
 
 before_commands:
-    - "composer install --prefer-source"
+    - "composer update --prefer-source -o"

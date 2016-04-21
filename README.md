@@ -1,6 +1,10 @@
 silex-simple-swagger-provider
 ======================
 
+[![Build Status](https://travis-ci.org/Basster/silex-simple-swagger-provider.svg?branch=master)](https://travis-ci.org/Basster/silex-simple-swagger-provider) 
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/Basster/silex-simple-swagger-provider/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/Basster/silex-simple-swagger-provider/?branch=master)
+[![Code Coverage](https://scrutinizer-ci.com/g/Basster/silex-simple-swagger-provider/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/Basster/silex-simple-swagger-provider/?branch=master)
+
 [silex-simple-swagger-provider](https://github.com/Basster/silex-simple-swagger-provider) is a silex service provider that
 integrates [swagger-php](https://github.com/zircote/swagger-php) (Version 2) into [silex](https://github.com/fabpot/Silex).  This
 service provider adds routes for generating and exposing a swagger defintion based on swagger-php annotations.  The

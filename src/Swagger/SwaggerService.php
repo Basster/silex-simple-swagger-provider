@@ -3,6 +3,7 @@
 namespace Basster\Silex\Provider\Swagger;
 
 use Silex\Application;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
@@ -13,38 +14,45 @@ use Symfony\Component\HttpFoundation\Response;
 class SwaggerService
 {
     /**
-     * @var \Basster\Silex\Provider\Swagger\SwaggerConfig
+     * @var SwaggerConfig
      */
     private $config;
 
     /**
-     * SwaggerService constructor.
-     *
-     * @param \Basster\Silex\Provider\Swagger\SwaggerConfig $config
+     * @var array
      */
-    public function __construct(SwaggerConfig $config)
-    {
-        $this->config = $config;
-    }
-
+    private $cacheConfig;
 
     /**
-     * @param array $cache
+     * SwaggerService constructor.
+     *
+     * @param SwaggerConfig $config
+     * @param array         $cacheConfig
+     */
+    public function __construct(SwaggerConfig $config, array $cacheConfig = [])
+    {
+        $this->config      = $config;
+        $this->cacheConfig = $cacheConfig;
+    }
+
+    /**
+     * @param \Symfony\Component\HttpFoundation\Request $request
      *
      * @return \Symfony\Component\HttpFoundation\Response
      * @throws \InvalidArgumentException
      */
-    public function getSwaggerResponse($cache = [])
+    public function getSwaggerResponse(Request $request)
     {
         $swagger = $this->getSwagger();
 
-        $response = new Response(
+        $response = Response::create(
           $swagger,
           Response::HTTP_OK,
           ['Content-Type' => 'application/json']
         );
-        $response->setCache($cache);
+        $response->setCache($this->cacheConfig);
         $response->setEtag(md5($swagger));
+        $response->isNotModified($request);
 
         return $response;
     }
@@ -54,8 +62,11 @@ class SwaggerService
      */
     public function getSwagger()
     {
-        $swagger = \Swagger\scan($this->config->getBasePath(),
-          $this->config->getScanOptions());
+        $swagger = \Swagger\scan(
+          $this->config->getBasePath(),
+          $this->config->getScanOptions()
+        );
+
         return $swagger;
     }
 }

@@ -6,7 +6,9 @@ namespace Basster\Silex\Provider\Test\Swagger;
 
 use Basster\Silex\Provider\Swagger\SwaggerConfig;
 use Basster\Silex\Provider\Swagger\SwaggerService;
+use Basster\Silex\Provider\Swagger\SwaggerServiceKey;
 use Basster\Silex\Provider\Test\Swagger\Dummy\SwaggerService as SwaggerDummy;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 class SwaggerServiceTest extends \PHPUnit_Framework_TestCase
@@ -20,12 +22,13 @@ class SwaggerServiceTest extends \PHPUnit_Framework_TestCase
         $maxAge  = 60;
 
         $config = $this->prophesize('Basster\Silex\Provider\Swagger\SwaggerConfig');
+        $cache  = ['max_age' => $maxAge];
 
-        $service = new SwaggerDummy($config->reveal());
+        $service = new SwaggerDummy($config->reveal(), $cache);
         $service->setSwagger($swagger);
-        $cache = ['max_age' => $maxAge];
 
-        $response = $service->getSwaggerResponse($cache);
+        $request  = Request::create(SwaggerServiceKey::SWAGGER_API_DOC_PATH);
+        $response = $service->getSwaggerResponse($request);
 
         self::assertEquals(Response::HTTP_OK, $response->getStatusCode());
         self::assertEquals('application/json',

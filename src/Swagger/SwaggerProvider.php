@@ -5,7 +5,6 @@ namespace Basster\Silex\Provider\Swagger;
 use Silex\Application;
 use Silex\ServiceProviderInterface;
 use Swagger\Annotations as SWG;
-use Symfony\Component\HttpFoundation\Request;
 
 class SwaggerProvider implements ServiceProviderInterface, SwaggerServiceKey
 {
@@ -31,7 +30,10 @@ class SwaggerProvider implements ServiceProviderInterface, SwaggerServiceKey
         });
 
         $app[self::SWAGGER_SERVICE] = $app::share(function (Application $app) {
-            return new SwaggerService($app[self::SWAGGER_CONFIG]);
+            return new SwaggerService(
+              $app[self::SWAGGER_CONFIG],
+              $app[self::SWAGGER_CACHE]
+            );
         });
 
         $app[self::SWAGGER] = $app::share(function (Application $app) {
@@ -44,14 +46,9 @@ class SwaggerProvider implements ServiceProviderInterface, SwaggerServiceKey
     /** {@inheritdoc} */
     public function boot(Application $app)
     {
-        $app->get($app[self::SWAGGER_API_DOC_PATH],
-          function (Application $app, Request $request) {
-              /** @var SwaggerService $swagger */
-              $swagger  = $app[self::SWAGGER_SERVICE];
-              $response = $swagger->getSwaggerResponse($app[self::SWAGGER_CACHE]);
-              $response->isNotModified($request);
-
-              return $response;
-          });
+        $app->get(
+          $app[self::SWAGGER_API_DOC_PATH],
+          [$app[self::SWAGGER_SERVICE], 'getSwaggerResponse']
+        );
     }
 }

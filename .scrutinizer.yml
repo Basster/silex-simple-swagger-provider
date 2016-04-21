@@ -28,5 +28,10 @@ tools:
         excluded_dirs: [vendor]
     sensiolabs_security_checker: true
 
+checks:
+    php:
+        code_rating: true
+        duplication: true
+
 before_commands:
     - "composer install --prefer-source"

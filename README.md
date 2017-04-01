@@ -15,8 +15,8 @@ but fully rewritten to meet the needs of [swagger-php](https://github.com/zircot
 
 :warning: For Silex2 and Pimple3 check out the `silex-2` branch :warning:
 
-Installation
-------------
+Installation für Silex 1
+------------------------
 Install the silex-swagger-provider using [composer](http://getcomposer.org/).
 
 ```bash

@@ -13,10 +13,8 @@ swagger definition can then be used with [swagger-ui](https://github.com/wordnik
 This library is strongly inspired by Jason Desrosiers [silex-swagger-provider](https://github.com/jdesrosiers/silex-swagger-provider)
 but fully rewritten to meet the needs of [swagger-php](https://github.com/zircote/swagger-php) (Version 2)
 
-:warning: For Silex2 and Pimple3 check out the `silex-2` branch :warning:
-
-Installation
-------------
+Installation for Silex 2
+------------------------
 Install the silex-swagger-provider using [composer](http://getcomposer.org/).
 
 ```bash

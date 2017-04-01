@@ -20,7 +20,7 @@ Installation
 Install the silex-swagger-provider using [composer](http://getcomposer.org/).
 
 ```bash
-composer require basster/silex-simple-swagger-provider
+composer require basster/silex-simple-swagger-provider:^1.0
 ```
 
 Parameters
